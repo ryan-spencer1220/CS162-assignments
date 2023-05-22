@@ -17,8 +17,10 @@ public:
   // constructors
   ActivityList();
   ActivityList(char[]);
+
   // destructor
   ~ActivityList();
+
   // database functions
   void addActivity(Activity &);
   void searchByName();
