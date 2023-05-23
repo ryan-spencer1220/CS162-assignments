@@ -8,10 +8,14 @@ const int GROWTH = 5;
 class ActivityList
 {
 private:
-  Activity *list;
+  struct Node
+  {
+    Activity data;
+    Node *next;
+  };
+  Node *head;
+  Node *tail;
   int size;
-  int capacity;
-  void growList();
 
 public:
   // constructors

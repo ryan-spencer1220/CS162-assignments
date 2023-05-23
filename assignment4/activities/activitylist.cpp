@@ -4,18 +4,17 @@
 // constructors
 ActivityList::ActivityList()
 {
-  capacity = CAP;
-  list = new Activity[capacity];
+  head = NULL;
+  tail = NULL;
   size = 0;
 }
 
 // constructor from file
 ActivityList::ActivityList(char fileName[])
 {
-  capacity = CAP;
-
-  list = new Activity[capacity];
-
+  head = NULL;
+  tail = NULL;
+  size = 0;
   size = 0;
   ifstream inFile;
   Activity anActivity;
@@ -57,20 +56,19 @@ ActivityList::ActivityList(char fileName[])
 // destructor
 ActivityList::~ActivityList()
 {
-  if (list)
+  Node *curr = head;
+  while (curr)
   {
-    delete[] list;
-    list = NULL;
+    head = curr->next;
+    delete curr;
+    curr = head;
   }
+  tail = NULL;
 }
 
 // Add activity to activityList
 void ActivityList::addActivity(Activity &anActivity)
 {
-  if (size == capacity)
-  {
-    growList();
-  }
 
   int i = 0;
   char tempActivityName[MAXCHAR];
@@ -242,20 +240,4 @@ void ActivityList::removeActivity()
   size--;
   cout << endl
        << "Activity removed!" << endl;
-}
-
-// adds capacity to activityList IF full
-void ActivityList::growList()
-{
-  capacity += GROWTH;
-
-  Activity *tempList = new Activity[capacity];
-  for (int i = 0; i < size; i++)
-  {
-    tempList[i] = list[i];
-  }
-
-  delete[] list;
-  list = tempList;
-  tempList = NULL;
 }
