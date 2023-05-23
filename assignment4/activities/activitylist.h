@@ -27,9 +27,9 @@ public:
 
   // database functions
   void addActivity(Activity &);
-  void searchByName();
-  void searchByLocation();
-  void searchByType();
+  // void searchByName();
+  // void searchByLocation();
+  // void searchByType();
   void showList();
   void removeActivity();
   void writeData(char[]);

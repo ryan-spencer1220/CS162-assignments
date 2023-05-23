@@ -55,18 +55,18 @@ void exeCmd(char option, ActivityList &activityList)
     activityList.showList();
     break;
   case 'c':
-    activityList.searchByLocation();
+    // activityList.searchByLocation();
     break;
   case 'd':
-    activityList.searchByType();
+    // activityList.searchByType();
     break;
   case 'e':
     activityList.showList();
-    activityList.removeActivity();
+    // activityList.removeActivity();
     activityList.showList();
     break;
   case 'f':
-    activityList.searchByName();
+    // activityList.searchByName();
     break;
   case 'q':
     break;
