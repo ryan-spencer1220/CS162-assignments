@@ -13,13 +13,13 @@ private:
   char *activityName;
   char *activityLocation;
   char *activityLevel;
-  char *activityType;
   int activityRating;
+  int activityType;
 
 public:
   // constructors
   Activity();
-  Activity(char *, char *, char *, int, char *);
+  Activity(char *, char *, char *, int, int);
 
   // copy constructor
   Activity(const Activity &anActivity);
@@ -32,14 +32,14 @@ public:
   void setActivityLocation(char *);
   void setActivityLevel(char *);
   void setActivityRating(int);
-  void setActivityType(char *);
+  void setActivityType(int);
 
   // accessor functions
   void getActivityName(char *);
   void getActivityLocation(char *);
   void getActivityLevel(char *);
   int getActivityRating();
-  void getActivityType(char *);
+  int getActivityType();
 
   // write & print functions
   void printActivity();

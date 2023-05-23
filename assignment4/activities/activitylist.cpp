@@ -22,7 +22,7 @@ ActivityList::ActivityList(char fileName[])
   char tempActivityLocation[MAXCHAR];
   char tempActivityLevel[MAXCHAR];
   int tempActivityRating = 0;
-  char tempActivityType[MAXCHAR];
+  int tempActivityType = 0;
 
   inFile.open(fileName);
   if (!inFile)
@@ -40,7 +40,7 @@ ActivityList::ActivityList(char fileName[])
     inFile.ignore(100, ';');
     inFile >> tempActivityRating;
     inFile.ignore(100, ';');
-    inFile.get(tempActivityType, MAXCHAR, '\n');
+    inFile >> tempActivityType;
     inFile.ignore(100, '\n');
     anActivity.setActivityName(tempActivityName);
     anActivity.setActivityLocation(tempActivityLocation);
@@ -120,124 +120,68 @@ void ActivityList::addActivity(Activity &anActivity)
 }
 
 // search by activityName
-// void ActivityList::searchByName()
-// {
-//   char searchName[MAXCHAR];
-//   char tempName[MAXCHAR];
-//   int count = 1;
-
-//   cout << "Enter the activity name (50 characters or less): ";
-//   cin.get(searchName, MAXCHAR);
-
-//   for (int i = 0; i < size; i++)
-//   {
-//     list[i].getActivityName(tempName);
-//     if (strstr(tempName, searchName) != NULL)
-//     {
-//       if (count == 1)
-//       {
-//         cout << "Activity found!" << endl
-//              << endl;
-//       }
-//       cout << count << ".";
-//       list[i].printActivity();
-//       count++;
-//     }
-//   }
-
-//   if (count == 1)
-//   {
-//     cout << "Activity not found!!" << endl;
-//   }
-
-//   cout << endl;
-// }
+void ActivityList::searchByName()
+{
+  char tempActivity[MAXCHAR], searchActivity[MAXCHAR];
+  cout << "Enter the activity name (50 characters or less): ";
+  cin.getline(searchActivity, MAXCHAR);
+  for (Node *curr = head; curr; curr = curr->next)
+  {
+    curr->data.getActivityName(tempActivity);
+    if (strstr(tempActivity, searchActivity) != NULL)
+    {
+      curr->data.printActivity();
+    }
+  }
+  cout << endl;
+}
 
 // search by activityLocation
-// void ActivityList::searchByLocation()
-// {
-//   char searchLocation[MAXCHAR];
-//   char tempLocation[MAXCHAR];
-//   int count = 1;
-
-//   cout << "Enter location name: ";
-//   cin.get(searchLocation, MAXCHAR);
-
-//   for (int i = 0; i < size; i++)
-//   {
-//     list[i].getActivityLocation(tempLocation);
-//     if (strstr(tempLocation, searchLocation) != NULL)
-//     {
-//       if (count == 1)
-//       {
-//         cout << "Activity found!" << endl
-//              << endl;
-//       }
-//       cout << count << ".";
-//       list[i].printActivity();
-//       count++;
-//     }
-//   }
-
-//   if (count == 1)
-//   {
-//     cout << "Activity not found!!" << endl;
-//   }
-
-//   cout << endl;
-// }
+void ActivityList::searchByLocation()
+{
+  char tempLocation[MAXCHAR], searchLocation[MAXCHAR];
+  cout << "Enter location name: ";
+  cin.getline(searchLocation, MAXCHAR);
+  for (Node *curr = head; curr; curr = curr->next)
+  {
+    curr->data.getActivityLocation(tempLocation);
+    if (strstr(tempLocation, searchLocation) != NULL)
+    {
+      curr->data.printActivity();
+    }
+  }
+  cout << endl;
+}
 
 // search by activityType
-// void ActivityList::searchByType()
-// {
-//   char searchType[MAXCHAR];
-//   char tempType[MAXCHAR];
-//   int userInt;
-//   int count = 1;
-//   char prompt[MAXCHAR] =
-//       "Enter Type number(0-Athletics, 1-Food, 2-Arts, 3-Games, and 4-Others): ";
-
-//   userInt = readInt(prompt);
-
-//   retrieveActivityType(userInt, searchType);
-
-//   cout << endl;
-
-//   for (int i = 0; i < size; i++)
-//   {
-//     list[i].getActivityType(tempType);
-//     if (strstr(tempType, searchType) != NULL)
-//     {
-//       if (count == 1)
-//       {
-//         cout << "Activity found!" << endl
-//              << endl;
-//       }
-//       cout << count << ".";
-//       list[i].printActivity();
-//       count++;
-//     }
-//   }
-
-//   if (count == 1)
-//   {
-//     cout << "Activity not found!!" << endl;
-//   }
-
-//   cout << endl;
-// }
+void ActivityList::searchByType()
+{
+  int userInt = 0;
+  char prompt[MAXCHAR] =
+      "Enter Type number(0-Athletics, 1-Food, 2-Arts, 3-Games, and 4-Others): ";
+  userInt = readInt(prompt);
+  for (Node *curr = head; curr; curr = curr->next)
+  {
+    if (userInt == curr->data.getActivityType())
+    {
+      curr->data.printActivity();
+    }
+  }
+  cout << endl;
+}
 
 // writes data to outFile
 void ActivityList::writeData(char fileName[])
 {
+  int count = 0;
   ofstream outFile;
   outFile.open(fileName);
   Node *curr;
   for (curr = head; curr; curr = curr->next)
   {
-    curr->data.printActivity(outFile);
+    curr->data.writeActivity(outFile, count, size);
+    count++;
   }
-  cout << endl;
 }
 
 // displays list
@@ -257,5 +201,5 @@ void ActivityList::showList()
 // remove activity from activityList
 void ActivityList::removeActivity()
 {
-  // code
+  cout << "We haven't implemented this option yet. Check back in a few weeks!" << endl;
 }

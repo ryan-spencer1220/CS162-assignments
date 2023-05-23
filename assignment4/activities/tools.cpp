@@ -49,24 +49,25 @@ void exeCmd(char option, ActivityList &activityList)
   {
   case 'a':
     addActivity(anActivity, activityList);
+    cout << endl;
     activityList.showList();
     break;
   case 'b':
     activityList.showList();
     break;
   case 'c':
-    // activityList.searchByLocation();
+    activityList.searchByLocation();
     break;
   case 'd':
-    // activityList.searchByType();
+    activityList.searchByType();
     break;
   case 'e':
-    activityList.showList();
-    // activityList.removeActivity();
-    activityList.showList();
+    // activityList.showList();
+    activityList.removeActivity();
+    // activityList.showList();
     break;
   case 'f':
-    // activityList.searchByName();
+    activityList.searchByName();
     break;
   case 'q':
     break;
@@ -113,10 +114,9 @@ void readString(char prompt[], char temp[])
 void addActivity(Activity &anActivity, ActivityList &activityList)
 {
   // temp variables
-  char tempName[MAXCHAR], tempLocation[MAXCHAR], tempLevel[MAXCHAR],
-      tempType[MAXCHAR];
+  char tempName[MAXCHAR], tempLocation[MAXCHAR], tempLevel[MAXCHAR];
   int tempRating = 0;
-  int tempIntType = 0;
+  int tempType = 0;
 
   // prompt variables
   char namePrompt[MAXCHAR] = "Enter the activity name (50 characters or less): ";
@@ -131,9 +131,7 @@ void addActivity(Activity &anActivity, ActivityList &activityList)
   readString(locationPrompt, tempLocation);
   readString(levelPrompt, tempLevel);
   tempRating = readInt(ratingPrompt);
-  tempIntType = readInt(typePrompt);
-
-  retrieveActivityType(tempIntType, tempType);
+  tempType = readInt(typePrompt);
 
   // call setter functions
   anActivity.setActivityName(tempName);

@@ -10,14 +10,13 @@ Activity::Activity()
   strcpy(activityLocation, "No location");
   activityLevel = new char[MAXCHAR];
   strcpy(activityLevel, "No level");
-  activityType = new char[MAXCHAR];
-  strcpy(activityType, "No type");
   activityRating = 0;
+  activityType = 0;
 }
 
 // constructor with parameters
 Activity::Activity(char *newName, char *newLocation, char *newLevel,
-                   int newRating, char *newType)
+                   int newRating, int newType)
 {
   activityName = new char[MAXCHAR];
   strcpy(activityName, newName);
@@ -25,9 +24,8 @@ Activity::Activity(char *newName, char *newLocation, char *newLevel,
   strcpy(activityLocation, newLocation);
   activityLevel = new char[MAXCHAR];
   strcpy(activityLevel, newLevel);
-  activityType = new char[MAXCHAR];
-  strcpy(activityType, newType);
   activityRating = newRating;
+  activityType = newType;
 }
 
 // Copy Constructor
@@ -36,7 +34,6 @@ Activity::Activity(const Activity &anActivity)
   activityName = new char[strlen(anActivity.activityName) + 1];
   activityLocation = new char[strlen(anActivity.activityLocation) + 1];
   activityLevel = new char[strlen(anActivity.activityLevel) + 1];
-  activityType = new char[strlen(anActivity.activityType) + 1];
   *this = anActivity;
 }
 
@@ -60,12 +57,6 @@ Activity::~Activity()
   {
     delete[] activityLevel;
     activityLevel = NULL;
-  }
-  // deallocate memory for activityType
-  if (activityType)
-  {
-    delete[] activityType;
-    activityType = NULL;
   }
 }
 
@@ -105,16 +96,7 @@ void Activity::setActivityLevel(char *newLevel)
 
 void Activity::setActivityRating(int newRating) { activityRating = newRating; }
 
-void Activity::setActivityType(char *newType)
-{
-  if (activityType)
-  {
-    delete[] activityType;
-    activityType = NULL;
-  }
-  activityType = new char[strlen(newType) + 1];
-  strcpy(activityType, newType);
-}
+void Activity::setActivityType(int newType) { activityType = newType; }
 
 // accessor functions
 void Activity::getActivityName(char *returnName)
@@ -134,10 +116,7 @@ void Activity::getActivityLevel(char *returnLevel)
 
 int Activity::getActivityRating() { return activityRating; }
 
-void Activity::getActivityType(char *returnType)
-{
-  strcpy(returnType, activityType);
-}
+int Activity::getActivityType() { return activityType; }
 
 // print single activity
 void Activity::printActivity()
