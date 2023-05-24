@@ -49,7 +49,9 @@ void exeCmd(char option, ActivityList &activityList)
   {
   case 'a':
     addActivity(anActivity, activityList);
-    cout << endl;
+    cout << endl
+         << "Activity Added!"
+         << endl;
     activityList.showList();
     break;
   case 'b':
@@ -88,6 +90,7 @@ int readInt(char prompt[])
     cin.clear();
     cin.ignore(100, '\n');
     cout << "Invalid input!! Please try again!!";
+    cout << prompt;
     cin >> temp;
   }
   cin.ignore(100, '\n');
@@ -104,6 +107,7 @@ void readString(char prompt[], char temp[])
     if (temp[i] == ';')
     {
       cout << "Invalid string! Please remove all semicolons from entry!" << endl;
+      cout << prompt;
       cin.clear();
       readString(prompt, temp);
     }

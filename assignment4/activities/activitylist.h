@@ -1,10 +1,6 @@
 #pragma once
 #include "activity.h"
 
-// constants
-const int CAP = 20;
-const int GROWTH = 5;
-
 class ActivityList
 {
 private:

@@ -4,12 +4,9 @@
 // default constructor
 Activity::Activity()
 {
-  activityName = new char[MAXCHAR];
-  strcpy(activityName, "No name");
-  activityLocation = new char[MAXCHAR];
-  strcpy(activityLocation, "No location");
-  activityLevel = new char[MAXCHAR];
-  strcpy(activityLevel, "No level");
+  activityName = NULL;
+  activityLocation = NULL;
+  activityLevel = NULL;
   activityRating = 0;
   activityType = 0;
 }
@@ -18,11 +15,11 @@ Activity::Activity()
 Activity::Activity(char *newName, char *newLocation, char *newLevel,
                    int newRating, int newType)
 {
-  activityName = new char[MAXCHAR];
+  activityName = new char[strlen(newName) + 1];
   strcpy(activityName, newName);
-  activityLocation = new char[MAXCHAR];
+  activityLocation = new char[strlen(newLocation) + 1];
   strcpy(activityLocation, newLocation);
-  activityLevel = new char[MAXCHAR];
+  activityLevel = new char[strlen(newLevel) + 1];
   strcpy(activityLevel, newLevel);
   activityRating = newRating;
   activityType = newType;

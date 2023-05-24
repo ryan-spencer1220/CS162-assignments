@@ -15,7 +15,6 @@ ActivityList::ActivityList(char fileName[])
   head = NULL;
   tail = NULL;
   size = 0;
-  size = 0;
   ifstream inFile;
   Activity anActivity;
   char tempActivityName[MAXCHAR];
@@ -69,20 +68,17 @@ ActivityList::~ActivityList()
 // Add activity to activityList
 void ActivityList::addActivity(Activity &anActivity)
 {
-
   Node *newNode = NULL, *curr = NULL, *prev = NULL;
   char str1[MAXCHAR], str2[MAXCHAR];
   // populate newNode
   newNode = new Node;
   newNode->data = anActivity;
   newNode->next = NULL;
-  // check to see if list is empty
   if (!head)
   {
     head = newNode;
     tail = newNode;
   }
-  // if list is not empty, then insert sorted by title
   else
   {
     curr = head;
@@ -97,19 +93,16 @@ void ActivityList::addActivity(Activity &anActivity)
         curr->data.getActivityName(str1);
       }
     }
-    // check to see if we are at the end of our list
     if (!curr)
     {
       tail->next = newNode;
       tail = newNode;
     }
-    // insert in between
     else if (prev)
     {
       newNode->next = curr;
       prev->next = newNode;
     }
-    // insert at the beginning
     else
     {
       newNode->next = curr;
@@ -123,16 +116,21 @@ void ActivityList::addActivity(Activity &anActivity)
 void ActivityList::searchByName()
 {
   char tempActivity[MAXCHAR], searchActivity[MAXCHAR];
-  cout << "Enter the activity name (50 characters or less): ";
-  cin.getline(searchActivity, MAXCHAR);
+  char prompt[MAXCHAR] = "Enter the activity name (50 characters or less): ";
+  int count = 1;
+  readString(prompt, searchActivity);
   for (Node *curr = head; curr; curr = curr->next)
   {
     curr->data.getActivityName(tempActivity);
     if (strstr(tempActivity, searchActivity) != NULL)
     {
+      count == 1 && cout << "Activity Found!" << endl;
+      cout << count << ". ";
       curr->data.printActivity();
+      count++;
     }
   }
+  count == 1 && cout << "Activity Not Found..." << endl;
   cout << endl;
 }
 
@@ -140,16 +138,21 @@ void ActivityList::searchByName()
 void ActivityList::searchByLocation()
 {
   char tempLocation[MAXCHAR], searchLocation[MAXCHAR];
-  cout << "Enter location name: ";
-  cin.getline(searchLocation, MAXCHAR);
+  int count = 1;
+  char prompt[MAXCHAR] = "Enter location name: ";
+  readString(prompt, searchLocation);
   for (Node *curr = head; curr; curr = curr->next)
   {
     curr->data.getActivityLocation(tempLocation);
     if (strstr(tempLocation, searchLocation) != NULL)
     {
+      count == 1 && cout << "Activity Found!" << endl;
+      cout << count << ". ";
       curr->data.printActivity();
+      count++;
     }
   }
+  count == 1 && cout << "Activity Not Found..." << endl;
   cout << endl;
 }
 
@@ -157,6 +160,7 @@ void ActivityList::searchByLocation()
 void ActivityList::searchByType()
 {
   int userInt = 0;
+  int count = 1;
   char prompt[MAXCHAR] =
       "Enter Type number(0-Athletics, 1-Food, 2-Arts, 3-Games, and 4-Others): ";
   userInt = readInt(prompt);
@@ -164,9 +168,13 @@ void ActivityList::searchByType()
   {
     if (userInt == curr->data.getActivityType())
     {
+      count == 1 && cout << "Activity Found!" << endl;
+      cout << count << ". ";
       curr->data.printActivity();
+      count++;
     }
   }
+  count == 1 && cout << "Activity Not Found..." << endl;
   cout << endl;
 }
 
@@ -202,4 +210,5 @@ void ActivityList::showList()
 void ActivityList::removeActivity()
 {
   cout << "We haven't implemented this option yet. Check back in a few weeks!" << endl;
+  cout << endl;
 }
