@@ -7,6 +7,7 @@ private:
   struct Node
   {
     Activity data;
+    Node *prev;
     Node *next;
   };
   Node *head;
@@ -27,6 +28,8 @@ public:
   void searchByLocation();
   void searchByType();
   void showList();
+  void showLast();
+  void reverseList();
   void removeActivity();
   void writeData(char[]);
 };

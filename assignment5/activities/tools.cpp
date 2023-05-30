@@ -25,9 +25,11 @@ void displayMenu()
   cout << "(a)Add a new activity" << endl;
   cout << "(b)List activities by name" << endl;
   cout << "(c)List activities by location" << endl;
-  cout << "(d)List activities by Type" << endl;
+  cout << "(d)List activities by type" << endl;
   cout << "(e)Remove an activity" << endl;
   cout << "(f)Search by activity name" << endl;
+  cout << "(g)List the last activity in the list" << endl;
+  cout << "(h)List activities by name in reverse order" << endl;
   cout << "(q)Quit" << endl
        << endl;
 }
@@ -64,12 +66,19 @@ void exeCmd(char option, ActivityList &activityList)
     activityList.searchByType();
     break;
   case 'e':
-    // activityList.showList();
+    activityList.showList();
     activityList.removeActivity();
-    // activityList.showList();
+    cout << endl;
+    activityList.showList();
     break;
   case 'f':
     activityList.searchByName();
+    break;
+  case 'g':
+    activityList.showLast();
+    break;
+  case 'h':
+    activityList.reverseList();
     break;
   case 'q':
     break;

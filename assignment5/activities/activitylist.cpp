@@ -206,9 +206,90 @@ void ActivityList::showList()
   cout << endl;
 }
 
+// displays last node
+void ActivityList::showLast()
+{
+  int count = 1;
+  Node *curr;
+  for (curr = head; curr; curr = curr->next)
+  {
+    if (count == size)
+    {
+      cout << count << ".";
+      curr->data.printActivity();
+    }
+    count++;
+  }
+  cout << endl;
+}
+
+// reverse linked list
+void ActivityList::reverseList()
+{
+  int count = 1;
+  Node *curr;
+  Node *temp;
+  for (curr = head; curr; curr = curr->next)
+  {
+    if (curr == head)
+    {
+      curr->prev = NULL;
+    }
+    else
+    {
+      curr->prev = temp;
+    }
+    temp = curr;
+  }
+  for (curr = tail; curr; curr = curr->prev)
+  {
+    cout << count << ".";
+    curr->data.printActivity();
+    count++;
+  }
+  cout << endl;
+}
+
 // remove activity from activityList
 void ActivityList::removeActivity()
 {
-  cout << "We haven't implemented this option yet. Check back in a few weeks!" << endl;
-  cout << endl;
+  char prompt[MAXCHAR] = "Select number for song to remove: ";
+  char prompt2[MAXCHAR] = "Bad Index, please re-enter: ";
+  int count = 1;
+  int toRemove = 0;
+  if (!size)
+  {
+    cout << "Nothing to remove! Terminating..." << endl;
+    return;
+  }
+  toRemove = readInt(prompt);
+  Node *curr = head;
+  Node *prev = NULL;
+  while (toRemove < 1 || toRemove > size)
+  {
+    toRemove = readInt(prompt2);
+  }
+  while (curr && count < toRemove)
+  {
+    prev = curr;
+    curr = curr->next;
+    count++;
+  }
+  if (!prev)
+  {
+    head = curr->next;
+  }
+  else if (curr == tail)
+  {
+    prev->next = curr->next;
+    tail = prev;
+  }
+  else
+  {
+    prev->next = curr->next;
+  }
+  delete curr;
+  curr = NULL;
+  prev = NULL;
+  size--;
 }
