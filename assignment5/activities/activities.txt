@@ -2,7 +2,6 @@ Cat Sitting;Friend's House;Easy;4;4
 Catan;Epic Gaming;Easy;4;3
 Golfing;Golf Course;Medium;7;0
 Oil Drawing;Home;Medium;6;2
-Oil Painting;Fun Studios;Tricky;6;2
 Play Pinball;Arcade;Fun;5;3
 Pottery;Fun Studios;Easy;7;2
 Rowing;Oaks Park;Tricky;8;2

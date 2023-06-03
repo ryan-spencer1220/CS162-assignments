@@ -47,6 +47,12 @@ char readOption()
 void exeCmd(char option, ActivityList &activityList)
 {
   Activity anActivity;
+  char locationPrompt[MAXCHAR] = "Enter location name: ";
+  char typePrompt[MAXCHAR] =
+      "Enter Type number(0-Athletics, 1-Food, 2-Arts, 3-Games, and 4-Others): ";
+  char namePrompt[MAXCHAR] = "Enter the activity name (50 characters or less): ";
+  int userInt = 0, size = 0, toRemove = 0;
+
   switch (tolower(option))
   {
   case 'a':
@@ -60,19 +66,26 @@ void exeCmd(char option, ActivityList &activityList)
     activityList.showList();
     break;
   case 'c':
-    activityList.searchByLocation();
+    char searchLocation[MAXCHAR];
+    readString(locationPrompt, searchLocation);
+    activityList.searchByLocation(searchLocation);
     break;
   case 'd':
-    activityList.searchByType();
+    userInt = readInt(typePrompt);
+    activityList.searchByType(userInt);
     break;
   case 'e':
     activityList.showList();
-    activityList.removeActivity();
+    size = activityList.getSize();
+    toRemove = deleteIndexDisplay(size);
+    activityList.removeActivity(toRemove);
     cout << endl;
     activityList.showList();
     break;
   case 'f':
-    activityList.searchByName();
+    char searchActivity[MAXCHAR];
+    readString(namePrompt, searchActivity);
+    activityList.searchByName(searchActivity);
     break;
   case 'g':
     activityList.showLast();
@@ -201,4 +214,29 @@ bool isLessThan(char activityName1[], char activityName2[])
   {
     return false;
   }
+}
+
+void activityFoundDisplay(int count)
+{
+  count == 1 && cout << "Activity Found!" << endl;
+  cout << count << ". ";
+}
+
+void activityNotFoundDisplay(int count)
+{
+  count == 1 && cout << "Activity Not Found..." << endl;
+  cout << endl;
+}
+
+int deleteIndexDisplay(int size)
+{
+  int index = 0;
+  char prompt[MAXCHAR] = "Select number for song to remove: ";
+  char prompt2[MAXCHAR] = "Bad Index, please re-enter: ";
+  index = readInt(prompt);
+  while (index < 1 || index > size)
+  {
+    index = readInt(prompt2);
+  }
+  return index;
 }

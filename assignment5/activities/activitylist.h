@@ -24,12 +24,13 @@ public:
 
   // database functions
   void addActivity(Activity &);
-  void searchByName();
-  void searchByLocation();
-  void searchByType();
+  void searchByName(char searchActivity[]);
+  void searchByLocation(char searchLocation[]);
+  void searchByType(int userInt);
   void showList();
   void showLast();
   void reverseList();
-  void removeActivity();
+  void removeActivity(int toRemove);
   void writeData(char[]);
+  int getSize();
 };

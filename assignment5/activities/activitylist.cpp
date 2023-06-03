@@ -113,69 +113,55 @@ void ActivityList::addActivity(Activity &anActivity)
 }
 
 // search by activityName
-void ActivityList::searchByName()
+void ActivityList::searchByName(char searchActivity[])
 {
-  char tempActivity[MAXCHAR], searchActivity[MAXCHAR];
-  char prompt[MAXCHAR] = "Enter the activity name (50 characters or less): ";
+  char tempActivity[MAXCHAR];
   int count = 1;
-  readString(prompt, searchActivity);
   for (Node *curr = head; curr; curr = curr->next)
   {
     curr->data.getActivityName(tempActivity);
     if (strstr(tempActivity, searchActivity) != NULL)
     {
-      count == 1 && cout << "Activity Found!" << endl;
-      cout << count << ". ";
+      activityFoundDisplay(count);
       curr->data.printActivity();
       count++;
     }
   }
-  count == 1 && cout << "Activity Not Found..." << endl;
-  cout << endl;
+  activityNotFoundDisplay(count);
 }
 
 // search by activityLocation
-void ActivityList::searchByLocation()
+void ActivityList::searchByLocation(char searchLocation[])
 {
-  char tempLocation[MAXCHAR], searchLocation[MAXCHAR];
+  char tempLocation[MAXCHAR];
   int count = 1;
-  char prompt[MAXCHAR] = "Enter location name: ";
-  readString(prompt, searchLocation);
   for (Node *curr = head; curr; curr = curr->next)
   {
     curr->data.getActivityLocation(tempLocation);
     if (strstr(tempLocation, searchLocation) != NULL)
     {
-      count == 1 && cout << "Activity Found!" << endl;
-      cout << count << ". ";
+      activityFoundDisplay(count);
       curr->data.printActivity();
       count++;
     }
   }
-  count == 1 && cout << "Activity Not Found..." << endl;
-  cout << endl;
+  activityNotFoundDisplay(count);
 }
 
 // search by activityType
-void ActivityList::searchByType()
+void ActivityList::searchByType(int userInt)
 {
-  int userInt = 0;
   int count = 1;
-  char prompt[MAXCHAR] =
-      "Enter Type number(0-Athletics, 1-Food, 2-Arts, 3-Games, and 4-Others): ";
-  userInt = readInt(prompt);
   for (Node *curr = head; curr; curr = curr->next)
   {
     if (userInt == curr->data.getActivityType())
     {
-      count == 1 && cout << "Activity Found!" << endl;
-      cout << count << ". ";
+      activityFoundDisplay(count);
       curr->data.printActivity();
       count++;
     }
   }
-  count == 1 && cout << "Activity Not Found..." << endl;
-  cout << endl;
+  activityNotFoundDisplay(count);
 }
 
 // writes data to outFile
@@ -251,24 +237,17 @@ void ActivityList::reverseList()
 }
 
 // remove activity from activityList
-void ActivityList::removeActivity()
+void ActivityList::removeActivity(int toRemove)
 {
-  char prompt[MAXCHAR] = "Select number for song to remove: ";
-  char prompt2[MAXCHAR] = "Bad Index, please re-enter: ";
   int count = 1;
-  int toRemove = 0;
   if (!size)
   {
     cout << "Nothing to remove! Terminating..." << endl;
     return;
   }
-  toRemove = readInt(prompt);
   Node *curr = head;
   Node *prev = NULL;
-  while (toRemove < 1 || toRemove > size)
-  {
-    toRemove = readInt(prompt2);
-  }
+
   while (curr && count < toRemove)
   {
     prev = curr;
@@ -292,4 +271,9 @@ void ActivityList::removeActivity()
   curr = NULL;
   prev = NULL;
   size--;
+}
+
+int ActivityList::getSize()
+{
+  return size;
 }

@@ -16,5 +16,8 @@ void retrieveActivityType(int tempNumber, char activityListType[]);
 bool isLessThan(char activityName1[], char activityName2[]);
 void welcomeMessage();
 void goodbyeMessage();
+void activityFoundDisplay(int count);
+void activityNotFoundDisplay(int count);
+int deleteIndexDisplay(int index);
 
 #endif
